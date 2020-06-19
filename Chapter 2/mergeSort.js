@@ -41,7 +41,4 @@ function merge(arr1, arr2)
 
 
 
-const arr = [4, 6, 3, 8, 3, 9, 2, 5, 87, 3, 8, 2, 4, 56, 2, 456, 876, 43];
-const sortedArr = mergeSort(arr);
-console.log("Unsorted array: " + arr);
-console.log("Sorted array: " + sortedArr);
+exports.mergeSort = mergeSort;
