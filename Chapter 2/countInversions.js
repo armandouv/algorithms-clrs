@@ -1,32 +1,35 @@
-function mergeSort(arr)
+function countInversions(arr)
 {
     const copy = [...arr];
-    mergeSortAux(copy, 0, copy.length - 1);
-    return copy;
+    return countInversionsAux(copy, 0, copy.length - 1);
 }
 
 
-function mergeSortAux(arr, first, last)
+
+function countInversionsAux(arr, first, last)
 {
     const size = last - first + 1;
-    if (size <= 1) return;
+    if (size <= 1) return 0;
     else if (size === 2)
     {
         if (arr[first] > arr[last])
         {
             [arr[first], arr[last]] = [arr[last], arr[first]];
+            return 1;
         }
-        return;
+        else return 0;
     }
 
     const half = Math.floor( (first + last) / 2);
-    mergeSortAux( arr, first, half );
-    mergeSortAux( arr, half + 1, last );
-    merge(arr, first, half, last);
+    const leftInv = countInversionsAux( arr, first, half );
+    const rightInv = countInversionsAux( arr, half + 1, last );
+    const inversions = mergeAndCount(arr, first, half, last) + leftInv + rightInv;
+
+    return inversions;
 }
 
 
-function merge(arr, first, half, last)
+function mergeAndCount(arr, first, half, last)
 {
     const arr1 = [];
     const arr2 = [];
@@ -43,6 +46,7 @@ function merge(arr, first, half, last)
 
     let mainIdx = first;
     let secondIdx = 0;
+    let inversions = 0;
 
     for (let i = 0; i < arr1.length; i++)
     {
@@ -51,13 +55,13 @@ function merge(arr, first, half, last)
             arr[mainIdx] = arr2[secondIdx];
             mainIdx++;
             secondIdx++;
+            inversions += arr1.length - i;
         }
 
         arr[mainIdx] = arr1[i];
         mainIdx++;
     }
 
-    // Add remaining elements if necessary
     if (secondIdx < arr2.length)
     {
         for (let i = secondIdx; i < arr2.length; i++)
@@ -66,7 +70,11 @@ function merge(arr, first, half, last)
             mainIdx++;
         }
     }
+
+    return inversions;
 }
 
 
-exports.mergeSort = mergeSort;
+const arr = [2, 3, 8, 6, 1];
+const inversions = countInversions(arr);
+console.log(`Number of inversions: ${inversions}`);
