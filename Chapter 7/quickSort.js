@@ -2,7 +2,7 @@ function partition(arr, start, end)
 {
     const pivot = arr[end];
     let i = start - 1;
-    for (let j = start; i < end - 1; i++)
+    for (let j = start; j <= end - 1; j++)
     {
         if (arr[j] <= pivot)
         {
@@ -38,3 +38,4 @@ function quickSort(arr)
     return copy;
 }
 
+module.exports = {randomizedPartition, quickSort};
