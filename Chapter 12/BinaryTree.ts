@@ -20,7 +20,7 @@ class BinaryTree
 
     search(key: number, root: NodeOrNull = this.root): NodeOrNull
     {
-        if (!root && root.key === key) return root;
+        if (!root || root.key === key) return root;
         else if (root.key < key) return this.search(key, root.left);
         else return this.search(key, root.right);
     }
@@ -85,6 +85,8 @@ class BinaryTree
             parent = child;
             child = node.key < child.key ? child.left : child.right;
         }
+
+        node.parent = parent;
 
         if (node.key < parent.key)
         {
