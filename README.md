@@ -1,2 +1,2 @@
 # Algorithms
-JavaScript implementations of several algorithms and data structures present in the Introduction to Algorithms textbook.
+Implementation of several algorithms and data structures from the Introduction to Algorithms textbook
